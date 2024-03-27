@@ -1,0 +1,8 @@
+output:
+  hello: guym
+deployment:
+  name: hello-python
+  replica: 4 
+  port: 81
+service: 
+  name: hello-python-service

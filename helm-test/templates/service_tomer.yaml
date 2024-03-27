@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+spec:
+  type: NodePort
+  selector:
+    app: {{ .Values.deployment.name }}
+  ports:
+    - port: {{ .Values.deployment.port }}
+      # By default and for convenience, the `targetPort` is set to
+      # the same value as the `port` field.
+      targetPort: {{ .Values.deployment.port }}
+      # Optional field
+      # By default and for convenience, the Kubernetes control plane
+      # will allocate a port from a range (default: 30000-32767)
+      nodePort: 30010
+  externalIPs:
+    - 4.245.216.252 

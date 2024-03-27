@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
+  replicas: {{ .Values.deployment.replica }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.name }}
+    spec:
+      containers:
+      - name: {{ .Values.deployment.name }}
+        image: tomeroz802/test-guym:2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.deployment.port }}
+        env:
+        - name: HELLO_SOMETHING
+          valueFrom:
+            configMapKeyRef:
+              name: my-configmap
+              key: hello-something
